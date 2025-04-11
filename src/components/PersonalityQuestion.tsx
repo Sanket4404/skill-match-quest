@@ -14,13 +14,13 @@ interface PersonalityQuestionProps {
 
 const PersonalityQuestion = ({ question, value, onChange }: PersonalityQuestionProps) => {
   const options = [
-    { value: "Strongly Disagree", label: "Strongly Disagree" },
-    { value: "Disagree", label: "Disagree" },
-    { value: "Slightly Disagree", label: "Slightly Disagree" },
-    { value: "Neutral", label: "Neutral" },
-    { value: "Slightly Agree", label: "Slightly Agree" },
-    { value: "Agree", label: "Agree" },
-    { value: "Strongly Agree", label: "Strongly Agree" },
+    { value: "Strongly Disagree", label: "Strongly Disagree", emoji: "😠" },
+    { value: "Disagree", label: "Disagree", emoji: "🙁" },
+    { value: "Slightly Disagree", label: "Slightly Disagree", emoji: "😕" },
+    { value: "Neutral", label: "Neutral", emoji: "😐" },
+    { value: "Slightly Agree", label: "Slightly Agree", emoji: "🙂" },
+    { value: "Agree", label: "Agree", emoji: "😊" },
+    { value: "Strongly Agree", label: "Strongly Agree", emoji: "😁" },
   ];
 
   return (
@@ -34,8 +34,8 @@ const PersonalityQuestion = ({ question, value, onChange }: PersonalityQuestionP
           className="gap-3"
         >
           <div className="flex justify-between text-sm text-gray-500 mb-2">
-            <span>Strongly Disagree</span>
-            <span>Strongly Agree</span>
+            <span>😠</span>
+            <span>😁</span>
           </div>
           
           <div className="flex justify-between gap-2">
@@ -51,9 +51,9 @@ const PersonalityQuestion = ({ question, value, onChange }: PersonalityQuestionP
                 />
                 <Label 
                   htmlFor={`${question.id}-${option.value}`}
-                  className="text-xs text-center"
+                  className="text-xl"
                 >
-                  {option.label}
+                  {option.emoji}
                 </Label>
               </div>
             ))}
