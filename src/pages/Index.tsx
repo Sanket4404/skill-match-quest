@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import SkillRating from "@/components/SkillRating";
 import PersonalityQuestion from "@/components/PersonalityQuestion";
 import { skills, personalityQuestions } from "@/data/questionData";
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [currentSection, setCurrentSection] = useState<'intro' | 'skills' | 'personality' | 'complete'>('intro');
@@ -15,6 +15,7 @@ const Index = () => {
   const { toast } = useToast();
   const [skillAnswers, setSkillAnswers] = useState<Record<string, number>>({});
   const [personalityAnswers, setPersonalityAnswers] = useState<Record<string, string>>({});
+  const navigate = useNavigate();
 
   const handleSkillRatingChange = (id: string, value: number) => {
     setSkillAnswers(prev => ({...prev, [id]: value}));
@@ -63,7 +64,6 @@ const Index = () => {
   };
 
   const submitForm = () => {
-    // For demonstration, we'll just show a success toast and move to completion screen
     toast({
       title: "Assessment Submitted",
       description: "Your responses have been recorded successfully.",
@@ -71,9 +71,15 @@ const Index = () => {
     setCurrentSection('complete');
     setProgress(100);
 
-    // In a real application, you would send this data to an API
     console.log("Skill answers:", skillAnswers);
     console.log("Personality answers:", personalityAnswers);
+    
+    navigate('/results', { 
+      state: { 
+        skillAnswers, 
+        personalityAnswers 
+      } 
+    });
   };
 
   return (
@@ -199,11 +205,19 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-medium text-gray-900">Thank You for Completing the Assessment</h3>
                 <p className="text-gray-700">
-                  Your responses have been recorded successfully. Our algorithm will analyze your skills and personality to recommend suitable career paths.
+                  Your responses have been recorded successfully. Our algorithm is analyzing your skills and personality traits.
                 </p>
                 <p className="text-gray-700">
-                  You will receive your results shortly.
+                  You will be redirected to your results shortly...
                 </p>
+                <div className="pt-4 flex justify-center">
+                  <Button 
+                    onClick={() => navigate('/results', { state: { skillAnswers, personalityAnswers } })}
+                    className="bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white"
+                  >
+                    View Results Now
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
