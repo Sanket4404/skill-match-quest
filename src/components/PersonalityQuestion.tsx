@@ -33,17 +33,13 @@ const PersonalityQuestion = ({ question, value, onChange }: PersonalityQuestionP
           onValueChange={onChange}
           className="gap-3"
         >
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
-            <span>😠</span>
-            <span>😁</span>
-          </div>
-          
           <div className="flex justify-between gap-2">
             {options.map((option) => (
               <div
                 key={option.value}
-                className="flex flex-col items-center gap-2 flex-1"
+                className="flex flex-col items-center gap-1 flex-1"
               >
+                <div className="text-2xl">{option.emoji}</div>
                 <RadioGroupItem
                   value={option.value}
                   id={`${question.id}-${option.value}`}
@@ -51,9 +47,9 @@ const PersonalityQuestion = ({ question, value, onChange }: PersonalityQuestionP
                 />
                 <Label 
                   htmlFor={`${question.id}-${option.value}`}
-                  className="text-xl"
+                  className="text-xs text-center mt-1"
                 >
-                  {option.emoji}
+                  {option.label}
                 </Label>
               </div>
             ))}
