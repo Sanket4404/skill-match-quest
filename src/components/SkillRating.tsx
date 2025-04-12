@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface SkillRatingProps {
   skill: {
@@ -28,7 +29,12 @@ const SkillRating = ({ skill, value, onChange }: SkillRatingProps) => {
   };
 
   return (
-    <div className="space-y-2">
+    <motion.div 
+      className="space-y-2"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Label htmlFor={skill.id} className="text-base font-medium">
         {skill.name}
       </Label>
@@ -40,11 +46,13 @@ const SkillRating = ({ skill, value, onChange }: SkillRatingProps) => {
       </div>
       <div className="flex gap-2" onMouseLeave={handleMouseLeave}>
         {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
-          <button
+          <motion.button
             key={rating}
             type="button"
             onClick={() => handleClick(rating)}
             onMouseEnter={() => handleMouseEnter(rating)}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
             className={cn(
               "flex-1 h-12 rounded-md transition-all duration-200",
               (rating <= (hoverValue || value)) 
@@ -60,13 +68,13 @@ const SkillRating = ({ skill, value, onChange }: SkillRatingProps) => {
             )}>
               {rating}
             </span>
-          </button>
+          </motion.button>
         ))}
       </div>
       <div className="text-sm text-right text-blue-600 font-medium">
         {value > 0 && `Selected rating: ${value}/7`}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
