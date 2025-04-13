@@ -36,21 +36,21 @@ const PersonalityQuestion = ({ question, value, onChange }: PersonalityQuestionP
         whileHover={{ boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
         transition={{ duration: 0.3 }}
       >
-        <h3 className="text-xl font-medium text-gray-800 mb-4">{question.text}</h3>
+        <h3 className="text-xl font-medium text-gray-800 mb-6">{question.text}</h3>
         
         <RadioGroup
           value={value}
           onValueChange={onChange}
-          className="gap-3"
+          className="w-full"
         >
-          <div className="flex justify-between gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4 max-w-full">
             {options.map((option) => (
               <div
                 key={option.value}
-                className="flex flex-col items-center gap-1 flex-1"
+                className="flex flex-col items-center justify-between h-full"
               >
                 <motion.div 
-                  className="text-2xl"
+                  className="text-3xl mb-2"
                   whileHover={{ scale: 1.2 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -63,7 +63,7 @@ const PersonalityQuestion = ({ question, value, onChange }: PersonalityQuestionP
                 />
                 <Label 
                   htmlFor={`${question.id}-${option.value}`}
-                  className="text-xs text-center mt-1 transition-all duration-200"
+                  className="text-xs text-center mt-2 transition-all duration-200 leading-tight"
                 >
                   {option.label}
                 </Label>

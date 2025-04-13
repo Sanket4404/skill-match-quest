@@ -36,22 +36,32 @@ const PersonalitySection = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
+      className="w-full px-4"
     >
-      <Card className="shadow-lg border-blue-200">
-        <CardHeader className="bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-t-lg">
+      <Card className="shadow-lg border-blue-200 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-t-lg p-6">
           <CardTitle className="text-center text-2xl">Personality Assessment</CardTitle>
         </CardHeader>
         <CardContent className="p-6">
           <div className="space-y-6">
-            <p className="text-gray-700 mb-4 font-medium">
-              Question {currentQuestion + 1} of {totalQuestions}
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-gray-700 font-medium">
+                Question {currentQuestion + 1} of {totalQuestions}
+              </p>
+              <div className="bg-blue-100 rounded-full px-3 py-1">
+                <p className="text-sm text-blue-700">
+                  {Math.round(((currentQuestion + 1) / totalQuestions) * 100)}% Complete
+                </p>
+              </div>
+            </div>
+            
             <PersonalityQuestion
               question={question}
               value={value}
               onChange={(value) => handlePersonalityChange(question.id, value)}
             />
-            <div className="mt-8 flex justify-between">
+            
+            <div className="mt-8 flex justify-between pt-2">
               <Button 
                 onClick={handlePrevious} 
                 variant="outline"
